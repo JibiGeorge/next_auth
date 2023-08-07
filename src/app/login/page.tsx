@@ -1,5 +1,6 @@
 "use client"
 
+import { useSearchParams } from 'next/navigation';
 import React, { useState } from 'react'
 
 const Login = () => {
@@ -7,7 +8,9 @@ const Login = () => {
     const [authState, setAuthState] = useState<loginInputType>({
         email: "",
         password: ""
-    })
+    });
+
+    const params = useSearchParams();
 
     const handleLogin = (e: { preventDefault: () => void }) => {
         e.preventDefault();
@@ -19,10 +22,11 @@ const Login = () => {
             <div className='bg-gray-500 p-2 rounded-md min-w-[400px]'>
                 <div className='bg-white p-3'>
                     <h1 className='text-2xl font-bold'>Login</h1>
-                    <p className='text-sm text-gray-600'>Don&#x27;t have an account? {" "}
+                    <p className='text-sm text-gray-600 mb-5'>Don&#x27;t have an account? {" "}
                         <span className='font-semibold text-black text-lg'>Sign Up</span>
                     </p>
-                    <form onSubmit={handleLogin} className='mt-5 flex flex-col gap-3'>
+                    {params.get("message") ? <p className='bg-green-400 font-semibold rounded-md px-3 py-1 text-[13px] mb-2'>{params.get("message")}</p> : null}
+                    <form onSubmit={handleLogin} className='flex flex-col gap-3'>
                         <div>
                             <p className='text-base font-medium text-gray-900'>Email</p>
                             <input
