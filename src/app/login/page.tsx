@@ -1,6 +1,19 @@
-import React from 'react'
+"use client"
+
+import React, { useState } from 'react'
 
 const Login = () => {
+
+    const [authState, setAuthState] = useState<loginInputType>({
+        email: "",
+        password: ""
+    })
+
+    const handleLogin = (e: { preventDefault: () => void }) => {
+        e.preventDefault();
+        console.log('Login Credentials', authState);
+
+    }
     return (
         <div className='w-full h-screen flex justify-center items-center'>
             <div className='bg-gray-500 p-2 rounded-md min-w-[400px]'>
@@ -9,16 +22,18 @@ const Login = () => {
                     <p className='text-sm text-gray-600'>Don&#x27;t have an account? {" "}
                         <span className='font-semibold text-black text-lg'>Sign Up</span>
                     </p>
-                    <form action="" className='mt-5 flex flex-col gap-3'>
+                    <form onSubmit={handleLogin} className='mt-5 flex flex-col gap-3'>
                         <div>
                             <p className='text-base font-medium text-gray-900'>Email</p>
                             <input
+                                onChange={(e) => setAuthState({ ...authState, email: e.target.value })}
                                 type="email"
                                 className='mt-1 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400' />
                         </div>
                         <div>
                             <p className='text-base font-medium text-gray-900'>Password</p>
                             <input
+                                onChange={(e) => setAuthState({ ...authState, password: e.target.value })}
                                 type="password"
                                 className='mt-1 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400' />
                         </div>
