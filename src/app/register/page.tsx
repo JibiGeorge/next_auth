@@ -36,8 +36,6 @@ const Register = () => {
             })
     }
 
-    console.log('error====>', error);
-
     return (
         <div className='w-full h-screen flex justify-center items-center'>
             <div className='bg-gray-500 p-2 rounded-md min-w-[400px]'>

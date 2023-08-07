@@ -15,3 +15,9 @@ type registerErrorType = {
   email?: String;
   password?: String;
 };
+
+type loginErrorType = {
+  errorMessage?: string;
+  email?: String;
+  password?: String;
+};
