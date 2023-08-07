@@ -10,10 +10,10 @@ const Register = () => {
         name: "",
         email: "",
         password: "",
-        confirmPassword: ""
+        password_confirmation: ""
     })
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState();
+    const [error, setError] = useState<registerErrorType>({});
 
     const router = useRouter()
 
@@ -35,6 +35,9 @@ const Register = () => {
                 setLoading(false)
             })
     }
+
+    console.log('error====>', error);
+
     return (
         <div className='w-full h-screen flex justify-center items-center'>
             <div className='bg-gray-500 p-2 rounded-md min-w-[400px]'>
@@ -43,7 +46,6 @@ const Register = () => {
                     <p className='text-sm text-gray-600 mb-5'>Already Have an Account? {" "}
                         <span className='font-semibold text-black text-lg'>Login</span>
                     </p>
-                    {error && <p className='text-[#ff3f3f] rounded-md text-[13px] font-semibold'>{error}</p>}
                     <form onSubmit={handleRegister} className=' flex flex-col gap-3'>
                         <div>
                             <p className='text-base font-medium text-gray-900'>Name</p>
@@ -51,6 +53,7 @@ const Register = () => {
                                 onChange={(e) => setAuthState({ ...authState, name: e.target.value })}
                                 type="text"
                                 className='mt-1 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400' />
+                            <span className='text-red-500 font-bold'>{error?.name}</span>
                         </div>
                         <div>
                             <p className='text-base font-medium text-gray-900'>Email</p>
@@ -58,6 +61,7 @@ const Register = () => {
                                 onChange={(e) => setAuthState({ ...authState, email: e.target.value })}
                                 type="email"
                                 className='mt-1 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400' />
+                            <span className='text-red-500 font-bold'>{error?.email}</span>
                         </div>
                         <div>
                             <p className='text-base font-medium text-gray-900'>Password</p>
@@ -65,16 +69,17 @@ const Register = () => {
                                 onChange={(e) => setAuthState({ ...authState, password: e.target.value })}
                                 type="password"
                                 className='mt-1 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400' />
+                            <span className='text-red-500 font-bold'>{error?.password}</span>
                         </div>
                         <div>
                             <p className='text-base font-medium text-gray-900'>Confirm Password</p>
                             <input
-                                onChange={(e) => setAuthState({ ...authState, confirmPassword: e.target.value })}
+                                onChange={(e) => setAuthState({ ...authState, password_confirmation: e.target.value })}
                                 type="password"
                                 className='mt-1 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400' />
                         </div>
                         <button className='bg-black font-semibold text-white p-2 rounded-md hover:bg-[#191919]'>
-                            {loading? "Loading" : "Register" }
+                            {loading ? "Loading" : "Register"}
                         </button>
                     </form>
                     <p className='text-center p-3'> -- OR -- </p>
