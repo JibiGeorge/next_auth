@@ -1,6 +1,7 @@
 "use client"
 
 import axios from 'axios';
+import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
 
@@ -34,6 +35,13 @@ const Register = () => {
                 console.log('error', error);
                 setLoading(false)
             })
+    }
+
+    const githubSignIn = () => {
+        signIn('github', {
+            callbackUrl: '/',
+            redirect: true
+        })
     }
 
     return (
@@ -82,6 +90,7 @@ const Register = () => {
                     </form>
                     <p className='text-center p-3'> -- OR -- </p>
                     <button
+                        onClick={githubSignIn}
                         className='bg-white w-full font-semibold text-black p-2 rounded-md border border-gray-400'
                     >
                         Continue with Git Hub

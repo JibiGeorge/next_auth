@@ -2,6 +2,7 @@ import { connect } from "@/db/mongo.config";
 import { User } from "@/model/UserSchema";
 import { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GitHubProvider from "next-auth/providers/github";
 
 export const authOptions: AuthOptions = {
   pages: {
@@ -48,6 +49,10 @@ export const authOptions: AuthOptions = {
           return null;
         }
       },
+    }),
+    GitHubProvider({
+      clientId: process.env.GITHUB_CLIENT_ID!,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET!,
     }),
   ],
 };
